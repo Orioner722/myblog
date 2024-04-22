@@ -1,0 +1,90 @@
+---
+title: "刚入职该怎么使用git"
+date: "2024-01-12"
+spoiler: "结合场景，适合刚入职的小伙伴使用"
+---
+
+小白同学今年刚毕业，进入一家公司，领导给他一个仓库地址。。。
+
+##### 怎么拉取代码进行开发呢
+
+第一步当然是把公司代码从线上拉取到自己电脑上啦
+
+```bash
+git clone https://github.com/Orioner722/xxxx.git
+```
+
+通过上一步，拉取master分支
+
+当然我们不能直接在master分支上进行开发，要新增并切换分支进行开发，像下面这样
+
+```bash
+git checkout -b <新分支名称，例如dev>
+```
+
+这样就可以放心开发啦
+
+##### 代码错误想撤销回滚怎么办
+
+###### git的工作流：
+
+- 工作区-代码还没有`git add .` 添加到暂存区
+
+```bash
+git checkout -- a.txt # 丢弃某个文件，或者
+git checkout -- . # 丢弃全部
+```
+
+
+
+- 暂存区-代码已经`git add .` 添加到暂存区，并未 `git commit -m "提交信息"` 提交到本地仓库
+
+```bash
+git reset HEAD .
+git reset HEAD a.txt
+```
+
+
+
+- 本地仓库- 代码已经通过 `git commit -m "提交信息"` 提交到本地仓库
+
+```bash
+git log # 得到你需要回退一次提交的commit id
+git reset --hard <commit_id> # 回到其中你想要的某个版本
+git reset --hard HEAD^ # 回到最新的一次提交
+git reset HEAD^ # 此时代码保留，回到 git add 之前
+```
+
+
+
+- 线上仓库例如gitee或github-代码 `git push` 已经提交到远程仓库
+
+  两种方法（`git reset`||`git revert`)
+
+  - 通过`git reset`是直接删除指定的commit
+
+    ```bash
+    git log # 得到你需要回退一次提交的commit id
+    git reset --hard <commit_id>
+    git push -f # 强制提交一次，之前错误的提交就从远程仓库删除
+    ```
+
+  这种办法相当于穿越时间，会把你之前提交commit id 之后的提交记录全部删除，就仿佛这些提交记录从来就没存在过
+
+  - 通过`git revert`是将之前的某次提交记录撤销
+
+    ```bash
+    git log # 得到你需要回退一次提交的commit id
+    git revert -n <commit_id>
+    git commit -m "重新提交信息"  #会保留之前重置的提交记录，但之前更改的文件没有保留更改 
+    git push origin #提交线上仓库
+    ```
+
+    
+
+
+
+
+
+
+
