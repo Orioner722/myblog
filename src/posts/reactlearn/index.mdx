@@ -1,3 +1,9 @@
+---
+title: "刚入职该怎么使用react"
+date: "2024-01-13"
+spoiler: "结合vue,快速上手react"
+---
+
 小白刚入职被告知将要参与的项目是react开发的，网上的教程都很好，但是太长了，来看看这篇吧
 
 ##### 认识JSX语法
@@ -27,19 +33,16 @@ export default function Home() {
 ```vue
 #vue-变量绑定
 <template>
-  <span>{{msg}}</span>
+  <span>{{ msg }}</span>
 </template>
 ```
-
-
 
 ```jsx
 #react-变量绑定
 export default function Home() {
-    
+
   const [msg,setMsg]=useState("我的第一个react组件");
-  
+
   return <span>{msg}</span>;
 }
 ```
-
