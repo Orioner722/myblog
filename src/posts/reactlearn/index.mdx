@@ -1,0 +1,45 @@
+小白刚入职被告知将要参与的项目是react开发的，网上的教程都很好，但是太长了，来看看这篇吧
+
+##### 认识JSX语法
+
+相较于Vue使用的template模板，react的`jsx`更像原生`javascript`函数的写法
+
+- ###### 组件编写
+
+```jsx
+#子组件
+export default function Home() {
+  return <span>我的第一个react组件</span>;
+}
+
+
+#父组件
+import Home from "@/components/Home/Home.jsx";
+
+export default function Home() {
+  return <Home />;
+}
+
+```
+
+- ###### 变量绑定
+
+```vue
+#vue-变量绑定
+<template>
+  <span>{{msg}}</span>
+</template>
+```
+
+
+
+```jsx
+#react-变量绑定
+export default function Home() {
+    
+  const [msg,setMsg]=useState("我的第一个react组件");
+  
+  return <span>{msg}</span>;
+}
+```
+

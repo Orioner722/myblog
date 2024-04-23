@@ -17,7 +17,7 @@ export default function Header() {
           <Image
             width={32}
             height={32}
-            alt="sunshineLixun"
+            alt="Orioner722"
             src="https://avatars.githubusercontent.com/u/76165623?u=4e9cd6498ca4ebabb6ee7df94de2469af7d43353&v=4"
             className="relative -top-1 mx-2 inline h-8 w-8 rounded-full"
           />
