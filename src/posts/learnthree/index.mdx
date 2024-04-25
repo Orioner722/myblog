@@ -1,0 +1,133 @@
+---
+title: "threejs的初步上手"
+date: "2024-01-08"
+spoiler: "在页面展示3D图形，让页面更有意思"
+---
+
+
+
+随着apple vision pro的发售，ar又重新出现在大众的视野，前端网站也有对应的3d渲染技术，这就是<u>*webgl*</u>
+
+而本文介绍的three.js就是对与webgl的封装，它可以让没有接触过图形渲染的前端程序员也能很快上手3d图形开发。
+
+想要在网页渲染图形需要创建 *场景（Scene），相机（Camera）,物体（mesh）,渲染器（WebGLRenderer）*
+
+- ##### 设置渲染html节点
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Discoverthreejs.com - Your First Scene</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+
+  <script type="module" src="./main.js"></script>
+</head>
+
+<body>
+ 
+
+  <div id="scene-container">
+    <!-- 3d图形将会渲染在这里 -->
+  </div>
+</body>
+
+</html>
+```
+
+创建main.js处理three.js
+
+```js
+//获取渲染节点
+const container = document.querySelector('#scene-container');
+
+```
+
+
+
+- ##### 创建场景
+
+```js
+//引入three 
+import {
+  
+  Color,
+   
+  Scene,
+  
+} from 'three';
+const scene = new Scene();
+
+// 设置场景背景颜色
+scene.background = new Color('skyblue');
+
+```
+
+- ##### 创建相机
+
+必须要有相机，它是模拟我们的眼睛，没有相机场景将会是黑黑一片
+
+```js
+import {
+PerspectiveCamera
+  
+} from 'three';
+// Create a camera
+const fov = 35; // 视角角度，视角越大观看范围越广
+const aspect = container.clientWidth / container.clientHeight;//相机观看比例，类似手机的屏幕比例
+const near = 0.1; // 渲染的最近距离
+const far = 100; // 渲染的最远距离
+const camera = new PerspectiveCamera(fov, aspect, near, far);
+
+// 所有的物体一开始都放在原点( 0, 0, 0 )
+// 把相机向前放一点，让我们可以看见物体
+camera.position.set(0, 0, 10);
+```
+
+- ##### 创建物体
+
+```js
+import {
+BoxBufferGeometry,
+MeshBasicMaterial,
+Mesh
+  
+} from 'three';
+// 创建几何体
+const geometry = new BoxBufferGeometry(2, 2, 2);
+
+// 创建材质
+const material = new MeshBasicMaterial();
+
+// 创建网格物体
+const cube = new Mesh(geometry, material);
+
+// 把网格物体放入到场景中
+scene.add(cube);
+```
+
+- ##### 创建渲染器
+
+渲染器就像个画家，它会根据场景，相机在网页上渲染出图像
+
+```js
+// 创建渲染器实例
+const renderer = new WebGLRenderer();
+
+// 设置渲染的尺寸和比例
+renderer.setSize(container.clientWidth, container.clientHeight);
+
+// 设置逻辑像素点，不然看起来会很奇怪
+renderer.setPixelRatio(window.devicePixelRatio);
+
+// 添加渲染器节点到页面节点
+container.append(renderer.domElement);
+
+// 渲染图像
+renderer.render(scene, camera);
+```
+
+这时就能在页面看到白色立方体
