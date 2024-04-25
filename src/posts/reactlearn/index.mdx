@@ -1,7 +1,7 @@
 ---
 title: "刚入职该怎么使用react"
 date: "2024-01-13"
-spoiler: "结合vue,快速上手react"
+spoiler: "结合vue，适合使用过vue的小伙伴使用"
 ---
 
 小白刚入职被告知将要参与的项目是react开发的，网上的教程都很好，但是太长了，来看看这篇吧
@@ -14,16 +14,16 @@ spoiler: "结合vue,快速上手react"
 
 ```jsx
 #子组件
-export default function Home() {
-  return <span>我的第一个react组件</span>;
+export default function Children() {
+  return (<span>我的第一个react组件</span>);
 }
 
 
 #父组件
-import Home from "@/components/Home/Home.jsx";
+import Children from "@/components/Children/Children.jsx";
 
-export default function Home() {
-  return <Home />;
+export default function Father() {
+  return <Children />;
 }
 
 ```
@@ -33,16 +33,165 @@ export default function Home() {
 ```vue
 #vue-变量绑定
 <template>
-  <span>{{ msg }}</span>
+  <span>{{msg}}</span>
 </template>
+export default {
+    
+    data () {
+      return {
+        msg: "我的第一个react组件"
+      }
+    }
+  }
 ```
+
+
+
+
 
 ```jsx
 #react-变量绑定
 export default function Home() {
-
+    
   const [msg,setMsg]=useState("我的第一个react组件");
-
+  
   return <span>{msg}</span>;
 }
 ```
+
+- ##### 事件绑定
+
+```vue
+#vue-事件绑定
+
+<template>
+  <button @click="clickHandle">{{msg}}</span>
+</template>
+<script>
+    export default {
+    
+    data () {
+      return {
+        msg: "我的第一个react组件"
+      }
+    },
+    methods:{
+clickHandle(e){
+	console.log("点击了按钮")
+    }
+}
+  }
+</script>
+
+
+```
+
+
+
+
+
+```jsx
+#react-事件绑定
+export default function Home() {
+    
+   function clickHandle(e){
+	console.log("点击了按钮")
+    }
+    
+  return <button onClick={clickHandle}>提交</button>;
+}
+
+
+<script>
+
+</script>
+```
+
+
+
+- ##### 父子组件传值
+
+```vue
+#vue-传值
+#父组件
+<template>
+  <div>
+    父组件:
+    <input type="text" v-model="name">
+    <br>
+    <br>
+    <!-- 引入子组件 -->
+    <child :inputName="name"></child>
+  </div>
+</template>
+<script>
+  import child from './child'
+  export default {
+    components: {
+      child
+    },
+    data () {
+      return {
+        name: ''
+      }
+    }
+  }
+</script>
+
+
+#子组件
+<template>
+  <div>
+    子组件:
+    <span>{{inputName}}</span>
+  </div>
+</template>
+<script>
+  export default {
+    // 接受父组件的值
+    props: {
+      inputName: String,
+      required: true
+    }
+  }
+</script>
+
+```
+
+##### 
+
+
+
+```jsx
+#react父子组件传值-父传子
+#子组件
+function Son(props, ref) {
+    return (
+        <div id="footerBox">
+            {props.page}底部
+        </div>
+    )
+}
+export default Son
+
+
+#父组件
+function Father (props,ref){
+	const [page, setPage] = useState("首页");//将page传给子组件
+    function changePage() {
+        setPage('改变了的首页');
+    }
+	return (
+ 		<div className="Home">
+            {page}
+            <button onClick={changePage}>改变page值</button>
+            <Son page={page}  />
+        </div>
+	)
+}
+
+export default Father
+
+```
+
+- ##### 

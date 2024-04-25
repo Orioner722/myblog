@@ -1,0 +1,69 @@
+---
+title: "怎么实现文字小于12px"
+date: "2024-01-05"
+spoiler: "浏览器对汉字最小字体有限制,,,"
+---
+
+#### 背景
+
+chrome中⽂版浏览器会默认⻚⾯的最⼩字号是12px，但是某些情况下，比如商品解释说明会要求比较小的文字，该怎么办呢
+
+
+
+#### 解决方法
+
+- ##### zoom
+
+```html
+<style type="text/css">
+ 
+ .span1{
+ font-size: 12px;
+ display: inline-block;
+ zoom: 0.8;
+ }
+ .span2{
+ display: inline-block;
+ font-size: 12px;
+ }
+ </style>
+ <body>
+ <span class="span1">
+测试10px</span>
+ <span class="span2">
+测试12px</span>
+ </body
+```
+
+- ##### -webkit-transform:scale()
+
+```html
+<style type="text/css">
+ span 
+ 
+ .span1{
+ font-size: 12px;
+ display: inline-block;-webkit-transform:scale(0.8);
+ }
+ .span2{
+ display: inline-block;
+ font-size: 12px;
+ }
+ </style>
+ <body>
+ <span class="span1">
+测试10px
+  </span>
+ <span class="span2">
+测试12px
+     </span>
+ </body>
+```
+
+
+
+#### 方法总结
+
+zoom  有兼容问题，缩放会改变了元素占据的空间⼤⼩，触发重排
+
+webkit-transform:scale()  ⼤部分现代浏览器⽀持，并且对英⽂、数字、中⽂也能够⽣效， 缩放不会改变了元素占据的空间⼤⼩，⻚⾯布局不会发⽣变化
