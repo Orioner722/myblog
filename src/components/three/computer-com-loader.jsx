@@ -10,7 +10,7 @@ export const DogContainer = forwardRef(({ children }, ref) => (
   </div>
 ));
 
-const Loader = () => {
+export default function Loader  ()  {
   return (
     <DogContainer>
       <DogSpinner />
@@ -18,4 +18,4 @@ const Loader = () => {
   );
 };
 
-export default Loader;
+ 
