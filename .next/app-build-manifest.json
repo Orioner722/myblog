@@ -9,8 +9,20 @@
     "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/css-src_app_globals_css-node_modules_next_font_google_target_css-node_modules_next_font_googl-accfe3.css",
+      "static/css/css-src_app_globals_css-node_modules_store_next_14_2_1_node_modules_next_font_google_target_c-3860c2.css",
       "static/chunks/app/layout.js"
+    ],
+    "/[slug]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/css-src_app_slug_markdown_css.css",
+      "static/chunks/app/[slug]/page.js"
+    ],
+    "/[slug]/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/css-src_app_globals_css-node_modules_store_next_14_2_1_node_modules_next_font_google_target_c-3860c2.css",
+      "static/chunks/app/[slug]/layout.js"
     ]
   }
 }
