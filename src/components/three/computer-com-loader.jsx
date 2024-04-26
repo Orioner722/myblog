@@ -1,3 +1,4 @@
+/* eslint-enable */
 import { forwardRef } from "react";
 import "./style.css";
 export const DogSpinner = () => (
