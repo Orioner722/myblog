@@ -3,6 +3,7 @@
     "/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
+      "static/css/css-src_components_three_style_css.css",
       "static/chunks/app/page.js"
     ],
     "/layout": [
