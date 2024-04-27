@@ -9,7 +9,7 @@ function easeOutCirc(x) {
   return Math.sqrt(1 - Math.pow(x - 1, 4));
 }
 
-const VoxelComputer = () => {
+export default function conputerLoader() {
   const refContainer = useRef();
   const [loading, setLoading] = useState(true);
   const refRenderer = useRef();
@@ -39,7 +39,7 @@ const VoxelComputer = () => {
       });
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.setSize(scW, scH);
-      renderer.outputEncoding = THREE.sRGBEncoding;
+      //renderer.outputEncoding = THREE.sRGBEncoding;
       container.appendChild(renderer.domElement);
       refRenderer.current = renderer;
       const scene = new THREE.Scene();
@@ -125,6 +125,4 @@ const VoxelComputer = () => {
   return (
     <DogContainer ref={refContainer}>{loading && <DogSpinner />}</DogContainer>
   );
-};
-
-export default VoxelComputer;
+}
