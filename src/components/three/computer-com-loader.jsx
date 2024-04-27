@@ -10,6 +10,13 @@ export const DogContainer = forwardRef(({ children }, ref) => (
     {children}
   </div>
 ));
+DogContainer.displayName = "DogContainer";
+
+// export function DogContainer(props) {
+//   <div className="h-40" position="relative">
+//     {props.children}
+//   </div>;
+// }
 
 // export default function Loader  ()  {
 //   return (
