@@ -6,6 +6,7 @@ import { loadGLTFModel } from "../../lib/model";
 import { DogSpinner, DogContainer } from "./computer-com-loader";
 // threejs导入
 function easeOutCirc(x) {
+  console.log(123);
   return Math.sqrt(1 - Math.pow(x - 1, 4));
 }
 
