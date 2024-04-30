@@ -1,0 +1,68 @@
+---
+title: "防抖与节流"
+date: "2024-01-03"
+spoiler: "减轻dom或服务器压力"
+---
+
+
+
+周五的晚上，小白刚要提交代码下班，准备渡过一个美好的周末，这时公司的后端同事问道，你的excel下载按钮做了防抖了吗，服务器都卡崩溃了。防抖是什么?小白疑惑道。防抖就是*指触发事件后 n 秒后才执行函数，如果在 n 秒内又触发了事件，则会重新计算函数执行时间*。可以避免用户频繁点击请求对后端服务器造成压力。
+
+- ##### 防抖函数
+
+```js
+ function debounce(func, wait, immediate) {
+    let timeout;
+    return function () {
+      const context = this;
+      const args = [...arguments];
+      if (timeout) clearTimeout(timeout);
+      if (immediate) {
+        const callNow = !timeout;
+        timeout = setTimeout(() => {
+          timeout = null;
+        }, wait)
+        if (callNow) func.apply(context, args)
+      }else {
+        timeout = setTimeout(() => {
+          func.apply(context, args)
+        }, wait);
+      }
+    }
+  }
+```
+
+- ##### 节流函数
+
+```js
+function throttle_merge(fn,wait = 500,isImmediate = false){
+  let flag = true;
+  let timer = null;
+    
+  if(isImmediate){
+    return function(){
+      if(flag) {
+        fn.apply(this,arguments);
+        flag = false;
+        timer = setTimeout(() => {
+          flag = true
+        },wait)
+      }
+    }
+  }
+    
+  return function(){
+    if(flag == true){
+      flag = false
+      var timer = setTimeout(() => {
+        fn.apply(this,arguments)
+        flag = true
+      },wait)
+    }
+  }
+}
+
+
+ 
+```
+
