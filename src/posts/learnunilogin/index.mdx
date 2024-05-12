@@ -1,0 +1,107 @@
+---
+title: "uniapp微信小程序登录"
+date: "2023-02-22"
+spoiler: "简洁的uniapp小程序登录流程"
+---
+
+微信小程序不同于平时我们开发的web项目，小程序凭借微信等开发平台的api赋予开发者更多权限，所以我们也要遵守相关平台规则，下面以*登录*为例
+
+- ##### 登录流程
+
+1. 调用uni.login() 获取 code 
+2. 通过code调取后端接口获取 sessionkey 和 openId
+3. 授权用户信息 获取后端需要的参数 
+4. 调用登录接口 存储token
+
+- ##### 代码
+
+```vue
+<template>
+		<view class="login flexC" @click="getlogin">微信授权登录</view>
+</template>
+<script>
+    export default{
+       
+onLoad() {
+	this.getCode()
+    },
+methods: {
+			//获取code
+			getCode() {
+				let that = this
+				uni.login({
+					provider: 'weixin',
+					success: function(res) {
+						console.log(res);
+						that.code = res.code
+						that.getSessionKey()
+					}
+				})
+			},
+			// code换seccesskey
+			async getSessionKey() {
+				let that = this
+				console.log(1)
+				try {
+					const res = await getSessionKey({
+						code: that.code
+					})
+					console.log('getSessionKey', res)
+					uni.setStorageSync("sessionkey", res.session_key)
+					uni.setStorageSync("openid",res.openid)
+					// 保存数据
+				} catch (err) {
+					uni.showToast({
+						title: err,
+						icon: 'none'
+					})
+					console.log('getSessionKey', err)
+				}
+			},
+			// 登录
+			async miniProgramLogin() {
+				let obj = {
+					session_key: uni.getStorageSync("sessionkey"),
+					iv: this.iv,
+					encryptedData: this.encryptedData,
+					openid: uni.getStorageSync("openid"),
+				}
+				try {
+					const res = await miniProgramLogin(obj)
+					console.log('miniProgramLogin', res)
+					uni.setStorageSync("token", res.token)
+					uni.setStorageSync("userInfo", res)
+					uni.navigateBack({})
+				} catch (err) {
+					uni.showToast({
+						title: err,
+						icon: 'none'
+					})
+					console.log('miniProgramLogin', err)
+				}
+			},
+			//登录操作
+			getlogin() {
+				//获取成功基本资料后开启登录，基本资料首先要授权
+				uni.getUserProfile({
+					desc: "获取你的昵称、头像、地区及性别",
+					success: res => {
+						this.iv = res.iv
+						this.encryptedData = res.encryptedData
+						this.miniProgramLogin() //授权成功可调用登录接口
+					},
+					fail: res => {
+						//拒绝授权  也可以再次获取最新的code
+						uni.showToast({
+							title: "您已拒绝登录",
+							icon: 'none',
+							duration: 2000
+						})
+						return;
+					},
+				})
+			},
+		}
+</script>
+```
+
