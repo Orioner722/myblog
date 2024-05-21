@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { parse } from "url";
-export const GET = (req: NextResponse, res: NextRequest) => {
+export const GET = (req: NextRequest, res: NextResponse) => {
   //console.log(NextRequest.arguments);
   const { id } = res.params;
   console.log("query", res);
