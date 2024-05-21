@@ -1,9 +1,17 @@
+//@ts-ignore
 import { NextResponse, NextRequest } from "next/server";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { parse } from "url";
-export const GET = (req: NextRequest, res: NextResponse) => {
+type NextResponseType = {
+  params: {
+    id: string;
+  };
+};
+export const GET = (req: NextRequest, res: NextResponseType) => {
   //console.log(NextRequest.arguments);
-  const { id } = res.params;
+  let id = "";
+
+  id = res.params.id;
   console.log("query", res);
 
   return NextResponse.json({ message: "Hello World" + id });
