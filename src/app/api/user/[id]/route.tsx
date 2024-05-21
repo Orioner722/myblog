@@ -9,7 +9,7 @@ type NextResponseType = {
 };
 export const GET = (req: NextRequest, res: NextResponseType) => {
   //console.log(NextRequest.arguments);
-  let id = "";
+  let id = "1";
 
   id = res.params.id;
   console.log("query", res);
