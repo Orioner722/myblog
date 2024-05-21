@@ -192,7 +192,7 @@
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	!function() {
-/******/ 		__webpack_require__.h = function() { return "b056272fa2755aa5"; }
+/******/ 		__webpack_require__.h = function() { return "9258d0b3051e461f"; }
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
@@ -831,8 +831,7 @@
 /******/ 		var installedChunks = __webpack_require__.hmrS_jsonp = __webpack_require__.hmrS_jsonp || {
 /******/ 			"webpack": 0,
 /******/ 			"css-src_components_three_style_css": 0,
-/******/ 			"css-src_app_globals_css-node_modules_next_font_google_target_css-node_modules_next_font_googl-accfe3": 0,
-/******/ 			"css-src_app_slug_markdown_css": 0
+/******/ 			"css-src_app_globals_css-node_modules_next_font_google_target_css-node_modules_next_font_googl-accfe3": 0
 /******/ 		};
 /******/ 		
 /******/ 		__webpack_require__.f.j = function(chunkId, promises) {
@@ -844,7 +843,7 @@
 /******/ 					if(installedChunkData) {
 /******/ 						promises.push(installedChunkData[2]);
 /******/ 					} else {
-/******/ 						if(/^(app(\/(\[slug\]\/(layout|page)|layout|page)|\-pages\-internals)|main\-app)$/.test(chunkId)) {
+/******/ 						if(/^(app(\-pages\-internals|\/layout|\/page)|main\-app)$/.test(chunkId)) {
 /******/ 							// setup Promise in chunk cache
 /******/ 							var promise = new Promise(function(resolve, reject) { installedChunkData = installedChunks[chunkId] = [resolve, reject]; });
 /******/ 							promises.push(installedChunkData[2] = promise);
